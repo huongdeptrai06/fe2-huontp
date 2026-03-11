@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Layout, Input, Form } from "antd";
 import { Route, Routes } from "react-router-dom";
 import Lab1 from "./pages/lab1";
+import Lab2 from "./pages/lab2";
 
 // const { Header, Content, Footer } = Layout;
 function App() {
@@ -82,6 +83,7 @@ function App() {
 
         <Routes>
           <Route path="/lab1" element={<Lab1/>}></Route>
+          <Route path="/lab2" element={<Lab2/>}></Route>
         </Routes>
       </div>
 
