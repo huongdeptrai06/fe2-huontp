@@ -113,6 +113,61 @@ function Bai2(){
         <Table columns={columns} dataSource={data} pagination={{pageSize:3}}/>
     );
 }
+function Bai3() {
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (status: string) => (
+        <span style={{ color: status === "active" ? "green" : "red" }}>
+          {status}
+        </span>
+      ),
+    },
+    {
+      title: "Action",
+      render: (_: any, record: any) => (
+        <>
+          <button className="px-3 py-1 mr-1 text-white bg-blue-500 inline-block rounded">Edit</button>
+          <button className="px-3 py-1 text-white bg-red-500 inline-block rounded">Del</button>
+        </>
+      ),
+    },
+  ];
+  const data = [
+    {
+      key: 1,
+      id: 1,
+      name: "iPhone 17",
+      email: "tranphuhuong1802@gmail.com",
+      status: "active",
+    },
+    {
+      key: 2,
+      id: 2,
+      name: "iPhone 17 Pro Max",
+      email: "tranphuhuong1802@gmail.com",
+      status: "inactive",
+    },
+  ];
+
+  return (
+    <Table columns={columns} dataSource={data} pagination={false} />
+  );
+}
+
 
 function Lab2() {
     return (
@@ -126,6 +181,11 @@ function Lab2() {
         <div>
           <h1 className="text-left font-bold">Bài 2</h1>
           <Bai2/>
+        </div>
+        
+        <div>
+          <h1 className="text-left font-bold">Bài 3</h1>
+          <Bai3/>
         </div>
 
       </div>
