@@ -1,15 +1,15 @@
-import { Form, Input, Button, Select  } from "antd";
+import { Form, Input, Button, Select } from "antd";
 import { useState } from "react";
 
-function Bai1(){
+function Bai1() {
   const onFinish = (values: any) => {
     console.log("Login data:", values);
   };
 
   return (
     <Form layout="vertical" onFinish={onFinish} style={{ maxWidth: 400 }}>
-      <Form.Item 
-        label="Email" 
+      <Form.Item
+        label="Email"
         name="email"
         rules={[
           { required: true, message: "Vui lòng nhập email" },
@@ -19,12 +19,10 @@ function Bai1(){
         <Input />
       </Form.Item>
 
-      <Form.Item 
-        label="Password" 
+      <Form.Item
+        label="Password"
         name="password"
-        rules={[
-          { required: true, message: "Vui lòng nhập password" }
-        ]}
+        rules={[{ required: true, message: "Vui lòng nhập password" }]}
       >
         <Input.Password />
       </Form.Item>
@@ -42,7 +40,6 @@ function Bai2() {
   const onFinish = (values: any) => {
     console.log("Register data:", values);
   };
-
   return (
     <Form layout="vertical" onFinish={onFinish} style={{ maxWidth: 500 }}>
       <Form.Item label="Họ và tên" name="name">
@@ -54,7 +51,7 @@ function Bai2() {
         name="email"
         rules={[
           { required: true, message: "Vui lòng nhập email" },
-          { type: "email", message: "Email chưa đúng định dạng" }
+          { type: "email", message: "Email chưa đúng định dạng" },
         ]}
       >
         <Input />
@@ -63,23 +60,31 @@ function Bai2() {
       <Form.Item label="Số điện thoại" name="phone">
         <Input />
       </Form.Item>
-
-      <Form.Item 
-        label="Mật khẩu" 
+      <Form.Item
+        label="Mật khẩu"
         name="password"
         rules={[
           { required: true, message: "Vui lòng nhập mật khẩu" },
-          { min: 6, message: "Password có ít nhất 6 ký tự" }
+          { min: 6, message: "Password có ít nhất 6 ký tự" },
         ]}
       >
         <Input.Password />
       </Form.Item>
 
-      <Form.Item 
-        label="Nhập lại mật khẩu" 
+      <Form.Item
+        label="Nhập lại mật khẩu"
         name="confirmPass"
+        dependencies={["password"]}
         rules={[
-          { required: true, message: "Vui lòng nhập lại mật khẩu" }
+          { required: true, message: "Vui lòng nhập lại mật khẩu" },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error("Mật khẩu nhập lại không khớp"));
+            },
+          }),
         ]}
       >
         <Input.Password />
