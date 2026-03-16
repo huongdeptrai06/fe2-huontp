@@ -1,4 +1,53 @@
 {
+  "stories": [
+    {
+      "title": "hhahaaa",
+      "author": "Nguyễn Văn A",
+      "image": "https://thuthuatnhanh.com/wp-content/uploads/2022/06/hinh-anh-la-vang-roi-dep-nhat.jpg",
+      "description": "hay",
+      "id": 1
+    },
+    {
+      "title": "hhahaaa",
+      "author": "Nguyễn Văn A",
+      "image": "https://thuthuatnhanh.com/wp-content/uploads/2022/06/hinh-anh-la-vang-roi-dep-nhat.jpg",
+      "description": "hay",
+      "id": 2
+    },
+    {
+      "title": "xd",
+      "author": "s",
+      "image": "https://thuthuatnhanh.com/wp-content/uploads/2022/06/hinh-anh-la-vang-roi-dep-nhat.jpg",
+      "description": "ss",
+      "id": 3
+    },
+    {
+      "title": "ssssssssssssssssss",
+      "categoryId": 2,
+      "description": "hâhahaahahahaha",
+      "id": 4
+    }
+  ],
+  "categories": [
+    {
+      "title": "tuyện mới",
+      "description": "rất là hayy",
+      "active": true,
+      "id": 1
+    },
+    {
+      "title": "chuyện hay",
+      "description": "rất là hayy",
+      "active": true,
+      "id": 2
+    },
+    {
+      "title": "rất hay",
+      "description": "hhhhhhhhhhhhhhhhhh",
+      "active": true,
+      "id": 3
+    }
+  ],
   "products": [],
   "users": []
 }
