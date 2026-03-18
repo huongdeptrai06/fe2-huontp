@@ -1,12 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button, Form, Input, Checkbox, Select } from "antd";
+import { Button, Form, Input, Checkbox, Select,DatePicker } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 interface Story {
   title: string;
-  description?: string;
+  author?: string;
   active?: boolean;
+  image?: string;
+  categoryId?: number;
+  createdAt?: string;
 }
 
 interface Category {
@@ -112,8 +115,8 @@ function Bai4() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: any) => {
-      await axios.post("http://localhost:3000/categories", values);
+    mutationFn: async (values: Story) => {
+      await axios.post("http://localhost:3000/stories", values);
     },
     onSuccess: () => {
       toast.success("Thêm truyện thành công yêu ơi");
@@ -123,8 +126,11 @@ function Bai4() {
     },
   });
 
-  const onFinish = (values: any) => {
-    mutate(values);
+  const onFinish = (values: Story) => {
+    mutate({
+      ...values,
+      createdAt: new Date().toISOString(),
+    });
   };
 
   return (
@@ -137,6 +143,18 @@ function Bai4() {
         <Input />
       </Form.Item>
 
+      <Form.Item
+        label="Tác giả"
+        name="author"
+        rules={[{ required: true, message: "Nhập tác giả" }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Link ảnh" name="image">
+        <Input placeholder="Nhập URL ảnh" />
+      </Form.Item>
+
       <Form.Item label="Danh mục" name="categoryId">
         <Select
           placeholder="Chọn danh mục"
@@ -147,8 +165,8 @@ function Bai4() {
         />
       </Form.Item>
 
-      <Form.Item label="Mô tả" name="description">
-        <Input.TextArea rows={4} />
+      <Form.Item label="Ngày thêm" name="createdAt">
+        <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} />
       </Form.Item>
 
       <Button type="primary" htmlType="submit" loading={isPending}>
