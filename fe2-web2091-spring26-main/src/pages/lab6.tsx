@@ -1,9 +1,10 @@
-import { Form, Input, Button, Spin,DatePicker } from "antd";
+import { Form, Input, Button, Spin, DatePicker } from "antd";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import dayjs from "dayjs";
 
 const Lab6 = () => {
   const [form] = Form.useForm();
@@ -21,7 +22,10 @@ const Lab6 = () => {
 
   useEffect(() => {
     if (data) {
-      form.setFieldsValue(data);
+      form.setFieldsValue({
+        ...data,
+        createdAt: data.createdAt ? dayjs(data.createdAt) : null,
+      });
     }
   }, [data]);
 
@@ -40,7 +44,12 @@ const Lab6 = () => {
   });
 
   const onFinish = (values: any) => {
-    mutation.mutate(values);
+    mutation.mutate({
+      ...values,
+      createdAt: values.createdAt
+        ? values.createdAt.toISOString()
+        : null,
+    });
   };
 
   if (isLoading) return <Spin />;
