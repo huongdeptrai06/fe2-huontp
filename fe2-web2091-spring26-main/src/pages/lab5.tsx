@@ -1,10 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Image, Table, Button, Popconfirm } from "antd";
+import { Image, Table, Button, Popconfirm, Input } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Bai1() {
   const qc = useQueryClient();
+  const [keyword, setKeyword] = useState("");
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getAllStories"],
@@ -23,6 +26,10 @@ function Bai1() {
       qc.invalidateQueries({ queryKey: ["getAllStories"] });
     },
   });
+
+  const filteredData = data?.filter((item: any) =>
+    item.title?.toLowerCase().includes(keyword.toLowerCase())
+  );
 
   const columns = [
     {
@@ -53,15 +60,23 @@ function Bai1() {
     {
       title: "Action",
       render: (_: any, record: any) => (
-        <Popconfirm
-          title="Xóa truyện"
-          description="Bạn có muốn xóa không "
-          okText="Có"
-          cancelText="Không"
-          onConfirm={() => mutate(record.id)}
-        >
-          <Button danger>Delete</Button>
-        </Popconfirm>
+        <>
+      <Popconfirm
+        title="Xóa truyện"
+        description="Bạn có muốn xóa không"
+        okText="Có"
+        cancelText="Không"
+        onConfirm={() => mutate(record.id)}
+      >
+        <Button danger style={{ marginRight: 8 }}>
+          Delete
+        </Button>
+      </Popconfirm>
+
+      <Link to={`/lab6/${record.id}`}>
+        <Button type="primary">Sửa</Button>
+      </Link>
+    </>
       ),
     },
   ];
@@ -71,15 +86,23 @@ function Bai1() {
   }
 
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      loading={isLoading}
-      rowKey="id"
-      pagination={{
-        pageSize: 5,
-      }}
-    />
+    <>
+      <Input
+        placeholder="Tìm theo tên truyện..."
+        style={{ marginBottom: 16, width: 300 }}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+
+      <Table
+        columns={columns}
+        dataSource={filteredData}
+        loading={isLoading}
+        rowKey="id"
+        pagination={{
+          pageSize: 5,
+        }}
+      />
+    </>
   );
 }
 

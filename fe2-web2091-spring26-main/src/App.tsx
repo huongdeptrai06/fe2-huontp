@@ -7,6 +7,7 @@ import Lab2 from "./pages/lab2";
 import Lab3 from "./pages/lab3";
 import Lab4 from "./pages/lab4";
 import Lab5 from "./pages/lab5";
+import Lab6 from "./pages/lab6";
 // const { Header, Content, Footer } = Layout;
 function App() {
   // const onFinish = (values: any) => {
@@ -64,6 +65,10 @@ function App() {
           <Link to="/lab5">
             <Button type="text">Lab5</Button>
           </Link>
+
+          <Link to="/lab6">
+            <Button type="text">Lab6</Button>
+          </Link>
         </div>
 
         {/* <Layout className="mt-2">
@@ -89,6 +94,7 @@ function App() {
           <Route path="/lab3" element={<Lab3/>}></Route>
           <Route path="/lab4" element={<Lab4/>}></Route>
           <Route path="/lab5" element={<Lab5/>}></Route>
+          <Route path="/lab6/:id" element={<Lab6 />} />
         </Routes>
       </div>
 

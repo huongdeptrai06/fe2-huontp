@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Form, Input, Checkbox, Select,DatePicker } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -106,6 +106,8 @@ function Bai2() {
 }
 
 function Bai4() {
+  const qc = useQueryClient();
+
   const { data } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
@@ -120,16 +122,19 @@ function Bai4() {
     },
     onSuccess: () => {
       toast.success("Thêm truyện thành công yêu ơi");
+      qc.invalidateQueries({ queryKey: ["getAllStories"] });
     },
     onError: () => {
       toast.error("lỗi thật rồi");
     },
   });
 
-  const onFinish = (values: Story) => {
+  const onFinish = (values: any) => {
     mutate({
       ...values,
-      createdAt: new Date().toISOString(),
+      createdAt: values.createdAt
+        ? values.createdAt.toISOString()
+        : new Date().toISOString(),
     });
   };
 
@@ -165,7 +170,11 @@ function Bai4() {
         />
       </Form.Item>
 
-      <Form.Item label="Ngày thêm" name="createdAt">
+      <Form.Item
+        label="Ngày thêm"
+        name="createdAt"
+        rules={[{ required: true, message: "Chọn ngày" }]}
+      >
         <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} />
       </Form.Item>
 
