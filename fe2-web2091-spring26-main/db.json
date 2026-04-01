@@ -45,5 +45,11 @@
     }
   ],
   "products": [],
-  "users": []
+  "users": [
+    {
+      "email": "tranphuhuong1802@gmail.com",
+      "password": "$2a$10$TLvO7uK2YRuS4nzKdU/whe8cy4buXB96i23G9e7lt8IZpC5K19xc.",
+      "id": 1
+    }
+  ]
 }

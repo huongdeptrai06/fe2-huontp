@@ -12,6 +12,8 @@ import Navbar from "./components/Header";
 import {theme as antdTheme } from "antd";
 import { ThemeContext } from "./context/ThemeContext";
 import { useContext } from "react";
+import Login from "./pages/login";
+import Register from "./pages/Register";
 
 // const { Header, Content, Footer } = Layout;
 function App() {
@@ -50,16 +52,8 @@ function App() {
             <Button className="mr-1" type="link">Lab4</Button>
           </Link>
 
-          <Link to="/thl4">
-            <Button className="mr-1" type="link">Lab4 TH</Button>
-          </Link>
-
           <Link to="/lab5">
             <Button type="text">Lab5</Button>
-          </Link>
-
-          <Link to="/thl5">
-            <Button type="text">Lab5 TH</Button>
           </Link>
 
           <Link to="/lab6">
@@ -91,6 +85,8 @@ function App() {
           <Route path="/lab4" element={<Lab4/>}></Route>
           <Route path="/lab5" element={<Lab5/>}></Route>
           <Route path="/lab6/:id" element={<Lab6 />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
 
